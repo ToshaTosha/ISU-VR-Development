@@ -1,0 +1,101 @@
+<!-- 
+"Live Server" in VS Code 
+          or 
+"python -m http.server" 
+-->
+
+
+<!DOCTYPE html>
+<head>
+    <title>Find pyramid </title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.2/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@4.2.2/dist/aframe-physics-system.min.js"></script>
+  </head>
+  <body>
+    <a-scene physics="debug: false; gravity: -1.6">
+
+      <a-assets>
+        <!-- текстуры -->
+        <img id="clear-sky" src="assets/textures/sky.jpg">
+        <img id="sand4" src="assets/textures/sand4_diff.jpg">
+        <img id="sand4_nor" src="assets/textures/sand4_nor.jpg">
+        <img id="brick" src="assets/textures/brick_diff.jpg">
+        <img id="brick_nor" src="assets/textures/brick_nor.jpg">
+        <img id="cloud" src="assets/textures/cloud2.jpg">
+        <img id="water" src="assets/textures/water2.jpg">
+        <img id="water_nor" src="assets/textures/water2nor.jpg">
+
+      </a-assets>
+
+      <a-camera position="0 1.4 23" kinematic-body>
+        <a-cursor></a-cursor>
+      </a-camera>
+    
+      <!-- земля -->
+      <a-plane static-body material="src: #sand4; repeat: 10 10; normal-map: #sand4_nor; normal-texture-repeat: 10 10" roughness="1" position="0 0 -5.2" rotation="-90 0 0" scale="75 75 1" ></a-plane>
+      
+
+      <!-- небо -->
+      <a-sky static_body src="#clear-sky" radius="25" rotation="20 50 300" side="double"></a-sky> 
+
+      <!-- свет -->
+      <a-light static-body type="ambient" color="#e2ca76"></a-light>
+      <a-light static-body type="point" intensity="1" position="-13.6 15 3"></a-light>
+
+      
+        <!-- Невидимый триггер -->
+        <!-- <a-box id="pyramid-trigger" 
+               position="-14 5 4" 
+               width="15" 
+               height="15" 
+               depth="15" 
+               visible="false"></a-box> -->
+      
+        <!-- Пирамида -->
+        <a-cone id="pyramid"
+            rotation="0 -40 0" 
+            position="-14 5.01 4" 
+            material="src: #brick; repeat: 15 5; normal-map: #brick_nor; normal-texture-repeat: 15 5;" 
+            scale="10 10 10" 
+            segmentsheight="1" 
+            segmentsradial="4"  
+            geometry="radiusTop: 0; segmentsHeight: 1; segmentsRadial: 4"
+            side="double"
+            static-body>
+        </a-cone>
+
+        <a-sphere color="blue" radius="0.5" position="-1 4 -4" dynamic-body></a-sphere>
+
+      
+        <!-- Скрипт для управления появлением
+        <script>
+          AFRAME.registerComponent('show-on-look', {
+            schema: {
+              target: { type: 'selector' } // объект, который будет отображаться
+            },
+            init: function () {
+              const el = this.el; // триггер
+              const target = this.data.target; // пирамида
+      
+              el.addEventListener('mouseenter', () => {
+                target.setAttribute('visible', 'true'); // показать пирамиду
+              });
+      
+              el.addEventListener('mouseleave', () => {
+                target.setAttribute('visible', 'false'); // скрыть пирамиду
+              });
+            }
+          });
+      
+          // Применение компонента
+          document.querySelector('#pyramid-trigger').setAttribute('show-on-look', 'target: #pyramid');
+        </script> -->
+      
+      
+
+
+    </a-scene>
+    
+  </body>
+</html>

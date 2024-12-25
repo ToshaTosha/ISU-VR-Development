@@ -1,27 +1,75 @@
-<html></html>
-  <head>
+<!-- 
+"Live Server" in VS Code 
+          or 
+"python -m http.server" 
+-->
+
+<html>
+<head>
+    <title>Find oasis</title>
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.2/dist/aframe-extras.min.js"></script>
   </head>
   <body>
     <a-scene>
-      <a-camera>
+
+      <a-assets>
+        <!-- текстуры -->
+        <img id="clear-sky" src="assets/textures/sky.jpg">
+        <img id="sand4" src="assets/textures/sand4_diff.jpg">
+        <img id="sand4_nor" src="assets/textures/sand4_nor.jpg">
+        <img id="brick" src="assets/textures/brick_diff.jpg">
+        <img id="brick_nor" src="assets/textures/brick_nor.jpg">
+        <img id="cloud" src="assets/textures/cloud2.jpg">
+        <img id="water" src="assets/textures/water2.jpg">
+        <img id="water_nor" src="assets/textures/water2nor.jpg">
+
+        <!-- <a-assets-item id="cactus" src="assets/models/cactus1.glb"></a-assets-item> -->
+        <a-assets-item id="cactus_big" src="assets/models/cactus_verde.glb"></a-assets-item>
+        <a-assets-item id="palm" src="assets/models/coconut_palm.glb"></a-assets-item>
+        <a-assets-item id="camel" src="assets/models/camel.glb"></a-assets-item>
+        <a-assets-item id="plant" src="assets/models/devongreen_stylized_plant.glb"></a-assets-item>
+        <a-assets-item id="rock" src="assets/models/low_poly_desert_rock.glb"></a-assets-item>
+        <a-assets-item id="cham" src="assets/models/low_poly_orange_panther_chameleon.glb"></a-assets-item>
+        <a-assets-item id="ruin" src="assets/models/jetty_ruins_polycam_ipad_pro_lidar.glb"></a-assets-item>
+
+      </a-assets>
+
+      <a-camera position="0 1.4 23">
         <a-cursor></a-cursor>
       </a-camera>
-      <!-- кактус -->
-      <a-box position="1 0.5 -7" rotation="0 0 0" color="#5b6f55" scale="0.3 3 0.3"></a-box>
-      <a-box position="1.2 1.3 -7" rotation="0 0 0" color="#5b6f55" scale="0.6 0.2 0.2"></a-box> <!--правая горизонтальная-->
-      <a-box position="1.5 1.5 -7" rotation="0 0 0" color="#5b6f55" scale="0.2 0.6 0.2"></a-box> <!--правая вертикальная-->
-      <a-box position="0.8 0.8 -7" rotation="0 0 0" color="#5b6f55" scale="0.6 0.2 0.2"></a-box> <!--левая горизонтальная-->
-      <a-box position="0.6 1 -7" rotation="0 0 0" color="#5b6f55" scale="0.2 0.4 0.2"></a-box> <!--левая вертикальная-->
+
+      <!-- примеры всех моделей -->
+
+      <!-- <a-entity id="cactus" visible="true" gltf-model=#cactus position="0 5 5"></a-entity> тяжеловатая моделька использовать мало -->
+
+      <!-- <a-entity id="palm" visible="true" gltf-model=#palm position="0 5 0"></a-entity>
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="0 5 10"></a-entity>
+      <a-entity visible="true" gltf-model="#camel" animation-mixer position="0 5 15"></a-entity>
+      <a-entity visible="true" gltf-model="#plant" position="0 5 20"></a-entity>
+      <a-entity visible="true" gltf-model="#rock" position="0 5 25"></a-entity>
+      <a-entity visible="true" gltf-model="#cham" position="0 5 -5" scale="0.02 0.02 0.02"></a-entity>
+      <a-entity visible="true" gltf-model="#ruin" position="0 5 -15"></a-entity> -->
+
+      <!-- элементы в начале появления -->
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="2 1 21"></a-entity>
+      <a-entity gltf-model="#rock" animation-mixer position="11 1 20" scale="2 2 2" rotation="0 90 90"></a-entity>
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="-3 1 24" scale="1.6 1.6 1.6"></a-entity>
+      <a-entity id="cactus" visible="true" gltf-model=#cactus position="-2 0.6 22" scale="0.6 0.6 0.6"></a-entity>
+      
+      <!-- элементы лабиринта далее -->
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="1.5 1 17" scale="2 2 2" rotation="0 75 0"></a-entity>
+      <a-entity gltf-model="#rock"  position="11 1 20" scale="2 2 2" rotation="0 90 90"></a-entity>
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="-3 1 24" scale="1.6 1.6 1.6"></a-entity>
+
       <!-- руины -->
-      <a-box position="2.5 0.5 -1.5" rotation="0 30 0" color="#c66" scale="1.5 1.5 4"></a-box>
+      <!-- <a-box position="2.5 0.5 -1.5" rotation="0 30 0" color="#c66" scale="1.5 1.5 4"></a-box>
       <a-box position="0.2 0.5 -1.5" rotation="0 60 0" color="#c66" scale="1 1 3"></a-box>
-      <a-box position="-3.5 0.5 -4" rotation="0 -30 0" color="#c66" scale="1.5 1.5 4"></a-box>
-      <!-- оазис -->
-      <a-box position="4 -0.5 -10" rotation="0 -30 0" color="#9cc" scale="1.5 1.5 1.5"></a-box>
+      <a-box position="-3.5 0.5 -4" rotation="0 -30 0" color="#c66" scale="1.5 1.5 4"></a-box> -->
+      
       <!-- камини -->
-      <a-box position="-3 0.5 0.2" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"
+      <!-- <a-box position="-3 0.5 0.2" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"
         event-set__enter="_event: mouseenter; color: #8FF7FF"
         event-set__leave="_event: mouseleave; color: #933">
       </a-box>
@@ -32,19 +80,61 @@
       <a-box position="-3.5 0.5 -0.3" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"
         event-set__enter="_event: mouseenter; color: #8FF7FF"
         event-set__leave="_event: mouseleave; color: #933">
-      </a-box>
+      </a-box> -->
       <!-- камини -->
-      <a-box position="-1 0.5 -8" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"></a-box>
-      <a-box position="-1.5 0.5 -7.5" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"></a-box>
+      <!-- <a-box position="-1 0.5 -8" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"></a-box>
+      <a-box position="-1.5 0.5 -7.5" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"></a-box> -->
       <!-- камини -->
-      <a-box position="3.2 0.5 -6" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"></a-box>
-      <a-box position="3 0.5 -6.5" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"></a-box>
+      <!-- <a-box position="3.2 0.5 -6" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"></a-box>
+      <a-box position="3 0.5 -6.5" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"></a-box> -->
+      
+      <!-- пирамида -->
+      <a-cone rotation="0 -40 0" 
+        side="double" 
+        position="-14 5.01 4" 
+        roughness="0.8"
+        material="src: #brick; repeat: 15 5; normal-map: #brick_nor; normal-texture-repeat: 15 5; " 
+        scale="10 10 10" segmentsheight="1" 
+        segmentsradial="4"  
+        geometry="radiusTop: 0; segmentsHeight: 1; segmentsRadial: 4">
+      </a-cone>
+
+      <!-- мираж -->
+      <!-- <a-box 
+        position="5 0.5 -10" 
+        material="color: #ffebb8; opacity: 0.3; transparent: true" 
+        scale="3 0.1 3" 
+        animation="property: material.opacity; to: 0.1; dur: 2000; dir: alternate; loop: true">
+      </a-box> -->
+
+    
       <!-- земля -->
-      <a-plane position="0 0 -5.2" rotation="-90 0 0" width="10" height="12" color="#c63"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
+      <a-plane material="src: #sand4; repeat: 10 10; normal-map: #sand4_nor; normal-texture-repeat: 10 10" roughness="1" position="0 0 -5.2" rotation="-90 0 0" scale="75 75 1" ></a-plane>
+      
+      <!-- вода оазиса -->
+      <a-circle 
+        position="-9 0.001 -15" 
+        rotation="-90 0 0"
+        scale = "6 4 4"
+        material="src: #water; repeat: 6 2; normal-map: #water_nor; normal-texture-repeat: 6 2; opacity: 0.6; transparent: true"
+        animation__scale="property: scale; to: 6.1 4.1 4.1; dur: 2000; dir: alternate; easing: easeInOutSine; loop: true"
+        animation__opacity="property: material.opacity; to: 0.8; dur: 2000; dir: alternate; easing: easeInOutSine; loop: true">
+      </a-circle>
+
+      <!-- небо -->
+      <a-sky src="#clear-sky" radius="25" rotation="20 50 300" side="double"></a-sky> 
+
+      <!-- облака -->
+      <a-icosahedron position="10 18 1" scale="3 1 1"  material="src: #cloud; transparent: true; opacity: 0.5" animation="property: position; to: -20 20 1; dur: 18000; easing: linear; loop: true"></a-icosahedron>
+      <a-icosahedron position="17 19 10" scale="5 1 1" material="src: #cloud; transparent: true; opacity: 0.5" animation="property: position; to: -20 21 10; dur: 25000; easing: linear; loop: true"></a-icosahedron>></a-icosahedron>
+      <a-icosahedron position="15 20 5" scale="4 1 1" material="src: #cloud; transparent: true; opacity: 0.5" animation="property: position; to: -30 22 5; dur: 30000; easing: linear; loop: true"></a-icosahedron>></a-icosahedron>
+      <a-icosahedron position="20 21 -6" scale="4 1 1" material="src: #cloud; transparent: true; opacity: 0.5" animation="property: position; to: -30 23 -6; dur: 35000; easing: linear; loop: true"></a-icosahedron>></a-icosahedron>
+      <a-icosahedron position="40 19 8" scale="6 1 1" material="src: #cloud; transparent: true; opacity: 0.5" animation="property: position; to: -30 23 -6; dur: 40000; easing: linear; loop: true"></a-icosahedron>></a-icosahedron>
       <!-- свет -->
       <a-light type="ambient" color="#e2ca76"></a-light>
-      <a-light type="point" intensity="1" position="1 3 3"></a-light>
+      <a-light type="point" intensity="1" position="-13.6 15 3"></a-light>
+      
+
     </a-scene>
     
   </body>
