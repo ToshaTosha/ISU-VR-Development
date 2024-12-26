@@ -9,11 +9,11 @@
     <title>Find oasis</title>
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-play-sound-on-event@1.0.2/dist/aframe-play-sound-on-event.min.js"></script>
-    <!-- <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script> -->
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.2/dist/aframe-extras.min.js"></script>
   </head>
   <body>
-    <a-scene>
+    <a-scene physics="debug: false; gravity: -9.8">
 
       <a-assets>
         <!-- музыка -->
@@ -39,8 +39,12 @@
         <a-assets-item id="ruin" src="assets/models/jetty_ruins_polycam_ipad_pro_lidar.glb"></a-assets-item>
         <a-assets-item id="stone" src="assets/models/low_poly_rock.glb"></a-assets-item>
         <a-assets-item id="stone-gray" src="assets/models/stone_low-poly.glb"></a-assets-item>
-
+        <a-assets-item id="weed" src="assets/models/tumbleweed_jumping.glb"></a-assets-item>
       </a-assets>
+
+      <a-plane id="loading-screen" color="#933" position="0 0.1 21" width="3" height="1" rotation="-90 0 0" scale="0.9 0.9 0.9">
+        <a-text value="Is there any water?..." color="#000" align="center" position="0 0 0"></a-text>
+      </a-plane>
       
       <a-camera position="0 1.4 23">
         <a-cursor></a-cursor>
@@ -108,45 +112,32 @@
       <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="22 3 -2" scale="3 3 3" rotation="0 0 0"></a-entity>
 
 
-      <!-- оазис -->
-      <a-entity gltf-model="#plant" visible="true"  position="-17 0.001 -15"  scale="" rotation=""></a-entity>
-      <a-entity gltf-model="#plant" visible="true"  position="-16 0.001 -12"  scale="" rotation=""></a-entity>
-      <a-entity gltf-model="#plant" visible="true"  position="-15 0.001 -10"  scale="1.5 1.5 1.5" rotation=""></a-entity>
-      <a-entity gltf-model="#plant" visible="true"  position="-17 0.001 -11"  scale="" rotation=""></a-entity>
+      
 
-      <a-entity gltf-model="#plant" visible="true"  position="-9.5 0.001 -20.5"  scale="" rotation=""></a-entity>
-      <a-entity gltf-model="#plant" visible="true"  position="-13 0.001 -17"  scale="1.5 1.5 1.5" rotation=""></a-entity>
-      
-      <a-entity gltf-model="#plant" visible="true"  position="-15 0.001 -15"  scale="" rotation=""></a-entity>
-      <a-entity gltf-model="#plant" visible="true"  position="-14 0.001 -12"  scale="" rotation=""></a-entity>
-      <a-entity gltf-model="#plant" visible="true"  position="-13 0.001 -10"  scale="1.5 1.5 1.5" rotation=""></a-entity>
-      <a-entity gltf-model="#plant" visible="true"  position="-15 0.001 -11"  scale="" rotation=""></a-entity>
-      
-      <a-entity gltf-model="#plant" visible="true"  position="-4 0.001 -14"  scale="" rotation=""></a-entity>
-      <a-entity gltf-model="#plant" visible="true"  position="-5 0.001 -12"  scale="" rotation=""></a-entity>
-      <a-entity gltf-model="#plant" visible="true"  position="-10.5 0.001 -9.5"  scale="1.5 1.5 1.5" rotation=""></a-entity>
-      
-      <a-entity gltf-model="#plant" visible="true"  position="-7 0.001 -10"  scale="" rotation=""></a-entity>
-      <a-entity gltf-model="#plant" visible="true"  position="-9 0.001 -10"  scale="" rotation=""></a-entity>
-      <a-entity gltf-model="#plant" visible="true"  position="-12 0.001 -18"  scale="1.5 1.5 1.5" rotation=""></a-entity>
-      <a-entity gltf-model="#plant" visible="true"  position="-19 0.001 -14"  scale="" rotation=""></a-entity>
-      
-      <a-entity gltf-model="#palm" visible="true"  position="-18 0 -8"  scale="" rotation=" 0 100 0"></a-entity>
-      <a-entity gltf-model="#palm" visible="true"  position="-17 0 -14"  scale="" rotation=" 0 80 0"></a-entity>
-
-      <!-- животные -->
-      <a-entity visible="true" gltf-model="#camel" position="-15 0 -8" ></a-entity>
-      <a-entity visible="true" gltf-model="#cham" position="8 0.2 19" scale="0.02 0.02 0.02" rotation="0 -90 0"></a-entity>
+      <!-- хамелеоны -->
+      <a-entity visible="true" gltf-model="#cham" position="8 0.2 19" scale="0.02 0.02 0.02" rotation="0 -90 0" 
+      event-set__click="_event: click; visible:false"></a-entity>
+      <!-- который рядом с оазисом -->
+      <a-entity visible="true" gltf-model="#cham" position="2 0.2 -12" scale="0.02 0.02 0.02" rotation="0 -90 0" 
+      event-set__enter="_event: mouseenter; visible:false"
+      event-set__leave="_event: mouseleave; visible:true"></a-entity>
+     
+      <!-- перекати поле -->
+      <a-entity gltf-model=#weed position="-4 0 6" dynamic-body
+        animation="property: position; to: 20 0 -6; dur: 20000; dir: alternate; loop: true"
+        animation__rotation="property: rotation; to: 0 360 0; dur: 5000; dir: alternate; loop: true">
+      </a-entity>
      
 
       <!-- мираж -->
       <a-entity id="mySound" sound="src: #lake; loop: true; volume: 0.7;"></a-entity>
       <a-box 
+        id="oasis-trigger"
         position="-9 0 -15" 
-        material="color: #ffebb8; opacity: 0.3; transparent: true" 
-        scale="15 15 15" 
-        animation="property: material.opacity; to: 0.1; dur: 2000; dir: alternate; loop: true"
-        onclick="soundControler()">
+        visible="false"
+        width="13" 
+        height="13" 
+        depth="13" >
       </a-box>
 
       <script>
@@ -168,16 +159,73 @@
       <!-- земля -->
       <a-plane material="src: #sand4; repeat: 10 10; normal-map: #sand4_nor; normal-texture-repeat: 10 10" roughness="1" position="0 0 -5.2" rotation="-90 0 0" scale="75 75 1" ></a-plane>
       
-      <!-- вода оазиса -->
+      
+
+      <a-entity id="oasisss" >
+        <!-- оазис -->
+      <a-entity gltf-model="#plant" visible="true"  position="-17 0.001 -15"  scale="" rotation=""></a-entity>
+      <a-entity gltf-model="#plant" visible="true"  position="-16 0.001 -12"  scale="" rotation=""></a-entity>
+      <a-entity gltf-model="#plant" visible="true"  position="-15 0.001 -10"  scale="1.5 1.5 1.5" rotation=""></a-entity>
+      <a-entity gltf-model="#plant" visible="true"  position="-17 0.001 -11"  scale="" rotation=""></a-entity>
+
+      <a-entity  gltf-model="#plant" visible="true"  position="-9.5 0.001 -20.5"  scale="" rotation=""></a-entity>
+      <a-entity  gltf-model="#plant" visible="true"  position="-13 0.001 -17"  scale="1.5 1.5 1.5" rotation=""></a-entity>
+      
+      <a-entity  gltf-model="#plant" visible="true"  position="-15 0.001 -15"  scale="" rotation=""></a-entity>
+      <a-entity  gltf-model="#plant" visible="true"  position="-14 0.001 -12"  scale="" rotation=""></a-entity>
+      <a-entity  gltf-model="#plant" visible="true"  position="-13 0.001 -10"  scale="1.5 1.5 1.5" rotation=""></a-entity>
+      <a-entity  gltf-model="#plant" visible="true"  position="-15 0.001 -11"  scale="" rotation=""></a-entity>
+      
+      <a-entity  gltf-model="#plant" visible="true"  position="-4 0.001 -14"  scale="" rotation=""></a-entity>
+      <a-entity  gltf-model="#plant" visible="true"  position="-5 0.001 -12"  scale="" rotation=""></a-entity>
+      <a-entity  gltf-model="#plant" visible="true"  position="-10.5 0.001 -9.5"  scale="1.5 1.5 1.5" rotation=""></a-entity>
+      
+      <a-entity  gltf-model="#plant" visible="true"  position="-7 0.001 -10"  scale="" rotation=""></a-entity>
+      <a-entity  gltf-model="#plant" visible="true"  position="-9 0.001 -10"  scale="" rotation=""></a-entity>
+      <a-entity  gltf-model="#plant" visible="true"  position="-12 0.001 -18"  scale="1.5 1.5 1.5" rotation=""></a-entity>
+      <a-entity  gltf-model="#plant" visible="true"  position="-19 0.001 -14"  scale="" rotation=""></a-entity>
+      
+      <a-entity  gltf-model="#palm" visible="true"  position="-18 0 -8"  scale="" rotation=" 0 100 0"></a-entity>
+      <a-entity  gltf-model="#palm" visible="true"  position="-17 0 -14"  scale="" rotation=" 0 80 0"></a-entity>
+
+        <!-- верблюд -->
+        <a-entity  visible="true" gltf-model="#camel" position="-15 0 -8" animation-mixer="clip: Armature|Idle_01"></a-entity>
+
+        <!-- вода оазиса -->
       <a-circle 
-        position="-9 0.001 -15" 
-        rotation="-90 0 45"
-        scale = "6 4 4"
-        material="src: #water; repeat: 6 2; normal-map: #water_nor; normal-texture-repeat: 6 2; opacity: 0.6; transparent: true"
-        animation__scale="property: scale; to: 6.1 4.1 4.1; dur: 2000; dir: alternate; easing: easeInOutSine; loop: true"
-        animation__opacity="property: material.opacity; to: 0.8; dur: 2000; dir: alternate; easing: easeInOutSine; loop: true">
-        
-      </a-circle>
+      position="-9 0.001 -15" 
+      rotation="-90 0 45"
+      scale = "6 4 4"
+      onclick="soundControler()"
+      material="src: #water; repeat: 6 2; normal-map: #water_nor; normal-texture-repeat: 6 2; opacity: 0.6; transparent: true"
+      animation__scale="property: scale; to: 6.1 4.1 4.1; dur: 2000; dir: alternate; easing: easeInOutSine; loop: true"
+      animation__opacity="property: material.opacity; to: 0.8; dur: 2000; dir: alternate; easing: easeInOutSine; loop: true">
+    </a-circle>
+      </a-entity>
+
+      <!-- Скрипт для управления появлением -->
+      <script>
+        AFRAME.registerComponent('show-on-look', {
+          schema: {
+            target: { type: 'selector' } // объект, который будет отображаться
+          },
+          init: function () {
+            const el = this.el; // триггер
+            const target = this.data.target; // пирамида
+    
+            el.addEventListener('mouseenter', () => {
+              target.setAttribute('visible', 'true'); // показать пирамиду
+            });
+    
+            el.addEventListener('mouseleave', () => {
+              target.setAttribute('visible', 'false'); // скрыть пирамиду
+            });
+          }
+        });
+    
+        // Применение компонента
+        document.querySelector('#oasis-trigger').setAttribute('show-on-look', 'target: #oasisss');
+      </script>
 
       <!-- небо -->
       <a-sky src="#clear-sky" radius="25" rotation="20 50 300" side="double"></a-sky> 
@@ -191,6 +239,7 @@
       <!-- свет -->
       <a-light type="ambient" color="#e2ca76"></a-light>
       <a-light type="point" intensity="1" position="-13.6 15 3"></a-light>
+      
       
 
     </a-scene>
