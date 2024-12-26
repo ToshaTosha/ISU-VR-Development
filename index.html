@@ -8,6 +8,7 @@
 <head>
     <title>Find oasis</title>
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-play-sound-on-event@1.0.2/dist/aframe-play-sound-on-event.min.js"></script>
     <!-- <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.2/dist/aframe-extras.min.js"></script>
   </head>
@@ -15,6 +16,9 @@
     <a-scene>
 
       <a-assets>
+        <!-- музыка -->
+        <audio id="lake" src="assets/sounds/lake.mp3" preload="auto"></audio>
+     
         <!-- текстуры -->
         <img id="clear-sky" src="assets/textures/sky.jpg">
         <img id="sand4" src="assets/textures/sand4_diff.jpg">
@@ -131,37 +135,34 @@
       <a-entity gltf-model="#palm" visible="true"  position="-17 0 -14"  scale="" rotation=" 0 80 0"></a-entity>
 
       <!-- животные -->
-      <a-entity visible="true" gltf-model="#camel" position="-15 0 -8"></a-entity>
+      <a-entity visible="true" gltf-model="#camel" position="-15 0 -8" ></a-entity>
       <a-entity visible="true" gltf-model="#cham" position="8 0.2 19" scale="0.02 0.02 0.02" rotation="0 -90 0"></a-entity>
      
 
-      <!-- камини -->
-      <!-- <a-box position="-3 0.5 0.2" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"
-        event-set__enter="_event: mouseenter; color: #8FF7FF"
-        event-set__leave="_event: mouseleave; color: #933">
-      </a-box>
-      <a-box position="-3.5 0.5 0.1" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"
-        event-set__enter="_event: mouseenter; color: #8FF7FF"
-        event-set__leave="_event: mouseleave; color: #933">
-      </a-box>
-      <a-box position="-3.5 0.5 -0.3" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"
-        event-set__enter="_event: mouseenter; color: #8FF7FF"
-        event-set__leave="_event: mouseleave; color: #933">
-      </a-box> -->
-      <!-- камини -->
-      <!-- <a-box position="-1 0.5 -8" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"></a-box>
-      <a-box position="-1.5 0.5 -7.5" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"></a-box> -->
-      <!-- камини -->
-      <!-- <a-box position="3.2 0.5 -6" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"></a-box>
-      <a-box position="3 0.5 -6.5" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"></a-box> -->
-
       <!-- мираж -->
-      <!-- <a-box 
-        position="5 0.5 -10" 
+      <a-entity id="mySound" sound="src: #lake; loop: true; volume: 0.7;"></a-entity>
+      <a-box 
+        position="-9 0 -15" 
         material="color: #ffebb8; opacity: 0.3; transparent: true" 
-        scale="3 0.1 3" 
-        animation="property: material.opacity; to: 0.1; dur: 2000; dir: alternate; loop: true">
-      </a-box> -->
+        scale="15 15 15" 
+        animation="property: material.opacity; to: 0.1; dur: 2000; dir: alternate; loop: true"
+        onclick="soundControler()">
+      </a-box>
+
+      <script>
+        let soundEntity = document.querySelector('#mySound');
+        let isPlaying = false;
+        
+        function soundControler() {
+          if (isPlaying) {
+            soundEntity.components.sound.stopSound();
+            isPlaying = false;
+          } else {
+            soundEntity.components.sound.playSound();
+            isPlaying = true;
+          }
+        }
+      </script>
 
     
       <!-- земля -->
@@ -175,6 +176,7 @@
         material="src: #water; repeat: 6 2; normal-map: #water_nor; normal-texture-repeat: 6 2; opacity: 0.6; transparent: true"
         animation__scale="property: scale; to: 6.1 4.1 4.1; dur: 2000; dir: alternate; easing: easeInOutSine; loop: true"
         animation__opacity="property: material.opacity; to: 0.8; dur: 2000; dir: alternate; easing: easeInOutSine; loop: true">
+        
       </a-circle>
 
       <!-- небо -->
