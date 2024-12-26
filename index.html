@@ -33,9 +33,11 @@
         <a-assets-item id="rock" src="assets/models/low_poly_desert_rock.glb"></a-assets-item>
         <a-assets-item id="cham" src="assets/models/low_poly_orange_panther_chameleon.glb"></a-assets-item>
         <a-assets-item id="ruin" src="assets/models/jetty_ruins_polycam_ipad_pro_lidar.glb"></a-assets-item>
+        <a-assets-item id="stone" src="assets/models/low_poly_rock.glb"></a-assets-item>
+        <a-assets-item id="stone-gray" src="assets/models/stone_low-poly.glb"></a-assets-item>
 
       </a-assets>
-
+      
       <a-camera position="0 1.4 23">
         <a-cursor></a-cursor>
       </a-camera>
@@ -53,21 +55,79 @@
       <a-entity visible="true" gltf-model="#ruin" position="0 5 -15"></a-entity> -->
 
       <!-- элементы в начале появления -->
-      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="2 1 21"></a-entity>
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="2 0.8 21" scale="0.8 0.8 0.8"></a-entity>
       <a-entity gltf-model="#rock" animation-mixer position="11 1 20" scale="2 2 2" rotation="0 90 90"></a-entity>
-      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="-3 1 24" scale="1.6 1.6 1.6"></a-entity>
-      <a-entity id="cactus" visible="true" gltf-model=#cactus position="-2 0.6 22" scale="0.6 0.6 0.6"></a-entity>
+      <a-entity visible="true" gltf-model="#stone" position="-4.5 -1 28" scale="2 2 2" rotation="0 0 0"></a-entity>
       
-      <!-- элементы лабиринта далее -->
-      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="1.5 1 17" scale="2 2 2" rotation="0 75 0"></a-entity>
-      <a-entity gltf-model="#rock"  position="11 1 20" scale="2 2 2" rotation="0 90 90"></a-entity>
-      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="-3 1 24" scale="1.6 1.6 1.6"></a-entity>
 
-      <!-- руины -->
-      <!-- <a-box position="2.5 0.5 -1.5" rotation="0 30 0" color="#c66" scale="1.5 1.5 4"></a-box>
-      <a-box position="0.2 0.5 -1.5" rotation="0 60 0" color="#c66" scale="1 1 3"></a-box>
-      <a-box position="-3.5 0.5 -4" rotation="0 -30 0" color="#c66" scale="1.5 1.5 4"></a-box> -->
+      <!-- элементы лабиринта далее до пирамиды-->
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="4 2.5 15" scale="2.5 2.5 2.5" rotation="0 0 0"></a-entity>
+      <a-entity gltf-model="#rock"  position="11 1 20" scale="2 2 2" rotation="0 90 90"></a-entity>
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="-11 1 16" scale="1.6 1.6 1.6"></a-entity>
+      <a-entity visible="true" gltf-model="#ruin" position="0 1.7 17" scale="2 2 2" rotation="0 -30 0"></a-entity>
+      <a-entity visible="true" gltf-model="#stone" position="5 -1 22"  scale="4 3 4" rotation="0 0 90"></a-entity>
+      <a-entity visible="true" gltf-model="#ruin" position="8 1 7" scale="1.5 1.5 1.5" rotation="0 50 0"></a-entity>
+
+
+      <!-- пирамида -->
+      <a-cone rotation="0 -40 0" 
+        side="double" 
+        position="-14 5.01 4" 
+        roughness="0.8"
+        material="src: #brick; repeat: 15 5; normal-map: #brick_nor; normal-texture-repeat: 15 5; " 
+        scale="10 10 10" segmentsheight="1" 
+        segmentsradial="4"  
+        geometry="radiusTop: 0; segmentsHeight: 1; segmentsRadial: 4">
+      </a-cone>
+
+
+      <!-- кактусы справа за камнями -->
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="12 0.6 14" rotation="0 30 0"></a-entity>
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="14 1 12.5" scale="1.6 1.6 1.6"></a-entity>
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="14 2 14" scale="2 2 2" rotation="10 0 0"></a-entity>
+
+
+      <!-- руины перед оазисом-->
+      <a-entity visible="true" gltf-model="#stone" position="7 -1 -11" scale="2 1.5 5" rotation="0 105 0"></a-entity>
+      <a-entity gltf-model="#rock" animation-mixer position="5 0.5 -7" scale="2 2 2" rotation="0 60 90"></a-entity>
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="-7 2 -4.5" scale="2.5 2.5 2.5" rotation="0 0 0"></a-entity>
+      <a-entity visible="true" gltf-model="#stone" position="-2.5 -0.5 -11" scale="2 2 2" rotation="0 180 0"></a-entity>
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="2 1.6 -7" scale="1.6 1.6 1.6" rotation="0 0 0"></a-entity>
+     <!-- <a-entity visible="true" gltf-model="#stone-gray" position="-3.5 0.5 -4" scale="0.005 0.005 0.005" rotation="0 60 0"></a-entity> -->
       
+      <a-entity gltf-model="#rock" animation-mixer position="20 0 -17" scale="2 4 3" rotation="0 100 90"></a-entity>
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="8 1.5 -20" scale="1.6 1.6 1.6" rotation="0 0 0"></a-entity>
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="7 1 -21" scale="1 1 1" rotation="0 75 0"></a-entity>
+    
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="21.5 1 -4.5" rotation="0 20 0"></a-entity>
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="21 1.6 -6" scale="1.6 1.6 1.6"></a-entity>
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="23 2 -4" scale="2 2 2" rotation="0 0 -8"></a-entity>
+      <a-entity id="cactus_big" visible="true" gltf-model=#cactus_big position="22 3 -2" scale="3 3 3" rotation="0 0 0"></a-entity>
+
+
+      <!-- оазис -->
+      <a-entity gltf-model="#plant" visible="true"  position="-17 0.001 -15"  scale="" rotation=""></a-entity>
+      <a-entity gltf-model="#plant" visible="true"  position="-16 0.001 -12"  scale="" rotation=""></a-entity>
+      <a-entity gltf-model="#plant" visible="true"  position="-15 0.001 -10"  scale="1.5 1.5 1.5" rotation=""></a-entity>
+      <a-entity gltf-model="#plant" visible="true"  position="-17 0.001 -11"  scale="" rotation=""></a-entity>
+      
+      <a-entity gltf-model="#plant" visible="true"  position="-15 0.001 -15"  scale="" rotation=""></a-entity>
+      <a-entity gltf-model="#plant" visible="true"  position="-14 0.001 -12"  scale="" rotation=""></a-entity>
+      <a-entity gltf-model="#plant" visible="true"  position="-13 0.001 -10"  scale="1.5 1.5 1.5" rotation=""></a-entity>
+      <a-entity gltf-model="#plant" visible="true"  position="-15 0.001 -11"  scale="" rotation=""></a-entity>
+      
+      <a-entity gltf-model="#plant" visible="true"  position="-4 0.001 -14"  scale="" rotation=""></a-entity>
+      <a-entity gltf-model="#plant" visible="true"  position="-5 0.001 -12"  scale="" rotation=""></a-entity>
+      <a-entity gltf-model="#plant" visible="true"  position="-10.5 0.001 -9.5"  scale="1.5 1.5 1.5" rotation=""></a-entity>
+      
+      <a-entity gltf-model="#plant" visible="true"  position="-7 0.001 -10"  scale="" rotation=""></a-entity>
+      <a-entity gltf-model="#plant" visible="true"  position="-9 0.001 -10"  scale="" rotation=""></a-entity>
+      <a-entity gltf-model="#plant" visible="true"  position="-12 0.001 -18"  scale="1.5 1.5 1.5" rotation=""></a-entity>
+      <a-entity gltf-model="#plant" visible="true"  position="-19 0.001 -14"  scale="" rotation=""></a-entity>
+      
+      <a-entity gltf-model="#palm" visible="true"  position="-17 0 -8"  scale="" rotation=" 0 90 0"></a-entity>
+
+
       <!-- камини -->
       <!-- <a-box position="-3 0.5 0.2" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"
         event-set__enter="_event: mouseenter; color: #8FF7FF"
@@ -87,17 +147,6 @@
       <!-- камини -->
       <!-- <a-box position="3.2 0.5 -6" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"></a-box>
       <a-box position="3 0.5 -6.5" rotation="0 60 0" color="#933" scale="0.5 0.5 0.5"></a-box> -->
-      
-      <!-- пирамида -->
-      <a-cone rotation="0 -40 0" 
-        side="double" 
-        position="-14 5.01 4" 
-        roughness="0.8"
-        material="src: #brick; repeat: 15 5; normal-map: #brick_nor; normal-texture-repeat: 15 5; " 
-        scale="10 10 10" segmentsheight="1" 
-        segmentsradial="4"  
-        geometry="radiusTop: 0; segmentsHeight: 1; segmentsRadial: 4">
-      </a-cone>
 
       <!-- мираж -->
       <!-- <a-box 
@@ -114,7 +163,7 @@
       <!-- вода оазиса -->
       <a-circle 
         position="-9 0.001 -15" 
-        rotation="-90 0 0"
+        rotation="-90 0 45"
         scale = "6 4 4"
         material="src: #water; repeat: 6 2; normal-map: #water_nor; normal-texture-repeat: 6 2; opacity: 0.6; transparent: true"
         animation__scale="property: scale; to: 6.1 4.1 4.1; dur: 2000; dir: alternate; easing: easeInOutSine; loop: true"
